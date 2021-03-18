@@ -1,0 +1,142 @@
+﻿@model MarketSite.Models.EditUserViewModel
+
+@{
+    ViewBag.Title = "編輯使用者";
+}
+
+<h2>編輯使用者</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @*<h4>Edit User Form.</h4>*@
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            <span style="font-weight:bold">
+                @Html.Label("帳號", new { @class = "bord control-label col-md-2" })
+            </span>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.AccountId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AccountId)
+            </div>
+        </div>
+        <div class="form-group">
+            <span style="font-weight:bold">
+                @Html.Label("使用者名稱", new { @class = "control-label col-md-2" })
+            </span>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+        </div>
+        <div class="form-group">
+            <span style="font-weight:bold">
+                @Html.Label("部門單位", new { @class = "control-label col-md-2" })
+            </span>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.UserDep, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserDep)
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <span style="font-weight:bold">
+                @Html.Label("帳號權限", new { @class = "control-label col-md-2" })
+            </span>
+            <span class="col-md-10">
+                @foreach (var item in Model.RolesList)
+                {
+                    <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                    @Html.Label(item.Value, new { @class = "control-label" })
+                }
+            </span>
+        </div>
+        <hr>
+
+
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                @foreach (var item in ViewBag.BrandTab)
+                {
+                    <a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab" href="#@item.BrandID" role="tab" aria-controls="nav-home" aria-selected="true">@item.BrandName</a>
+                }
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+                    @foreach (var item in ViewBag.BrandTab)
+                    {
+                        <div class="tab-pane fade " id="@item.BrandID" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <div class="form-group">
+                                <span style="font-weight:bold">
+                                    @Html.Label("總部/代理商", new { @class = "control-label col-md-2" })
+                                </span>
+                                @*<span class="col-md-10">
+                                @foreach (var item in ViewBag.Stores)
+                                {
+                                    <input type="checkbox" name="selectedStores" value="@item.StoreId" checked="@item.Assigned" class="checkbox-inline" />
+                                    @item.StoreName
+                                }
+                            </span>*@
+                                <table class="col-md-10">
+                                    <tr>
+                                        @{
+                                int cnt = 0;
+                                List<MarketSite.Models.AssignedAgent> agents = ViewBag.Agents;
+
+                                agents = agents
+                                    .Where(a => a.ComBrand == item.BrandID)
+                                    .Select(a => a)
+                                    .ToList();
+
+                                foreach (var agent in agents)
+                                {
+                                    if (cnt++ % 5 == 0)
+                                    {
+                        @:</tr><tr>
+                                    }
+                        @:<td>
+                            <input type="checkbox"
+                                   name="selectedAgents"
+                                   value="@agent.ComID"
+                                   @(Html.Raw(agent.Assigned ? "checked=\"checked\"" : "")) />
+                            @agent.ComName
+                            @:</td>
+                                }@:</tr>
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+
+                    }
+                    <hr>
+                    <div class="form-group">
+                        <span style="font-weight:bold">
+                            @Html.Label("店家管理", new { @class = "control-label col-md-2" })
+                        </span>
+                        @*<div>@Html.ActionLink("店家列表", "StoreEdit", new { }, new { target = "_blank" })</div>*@
+                        
+                        <input type="submit" value="店家列表" class="btn btn-primary" name="storeSubmit" />
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="儲存" class="btn btn-default" />
+                        </div>
+                    </div>
+                
+        </div>
+        </div>
+
+                        }
+
+<div>
+    @Html.ActionLink("回到列表", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,73 @@
+﻿@model MarketSite.Models.RankingListViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@{  
+    ViewBag.Title = @MarketSite.App_GlobalResources.Resource.RankingList;
+}
+
+<h2>@MarketSite.App_GlobalResources.Resource.RankingList</h2>
+
+@using (Html.BeginForm(null, "RankingList", FormMethod.Post, new { id = "formMenu" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="input-group">
+        <div class="container">
+            <div class="form-row">
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchBrand", (IEnumerable<SelectListItem>)ViewBag.searchBrand, new { onChange = "selectBrand()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchCom", (IEnumerable<SelectListItem>)ViewBag.searchCom, new { onChange = "selectCom()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.TextBox("startDate", DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd"), new { type = "date", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.TextBox("endDate", DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd"), new { type = "date", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    <input class="col-sm-auto btn btn-primary" type="submit" value="@MarketSite.App_GlobalResources.Resource.Inquiry" />
+                </div>
+                <div class="col-sm-auto">
+                    <input type="button" class="col-sm-auto btn btn-success" value="Excel" onclick="download();" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-auto">※查詢日期區間最多1個月</div>
+    </div>
+}
+<p></p>
+@if (Model != null)
+{
+    <table class="table" id="exportExcel">
+        <tr>
+            <th>排行</th>
+            <th>店號</th>
+            <th>店名</th>
+            <th>來客數</th>
+            @*<th>總未稅金額</th>*@
+            <th>杯數</th>
+            <th>總交易金額</th>
+            <th>幣別</th>
+        </tr>
+        @{  int num = 0;
+            foreach (var item in Model.RankingList)
+            {
+                num += 1;
+                <tr>
+                    <td>@num</td>
+                    <td>@Html.DisplayFor(modelItem => item.StoreNo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StoreName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderCount)</td>
+                    @*<td>@Html.DisplayFor(modelItm => item.NonTaxTotal)</td>*@
+                    <td>@Html.DisplayFor(modelItem => item.ProdCount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalRetail)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CurrencyID)</td>
+                </tr>
+            }
+        }
+    </table>
+    
+}

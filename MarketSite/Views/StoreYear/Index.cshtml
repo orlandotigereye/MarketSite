@@ -1,0 +1,109 @@
+﻿@model IEnumerable<MarketSite.Models.StoreYearViewModel>
+
+@{
+    ViewBag.Title = @MarketSite.App_GlobalResources.Resource.StoreYear;
+}
+
+<h2>@MarketSite.App_GlobalResources.Resource.StoreYear</h2>
+
+@using (Html.BeginForm(null, "StoreYear", FormMethod.Post, new { id = "formMenu" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="input-group">
+        <div class="container">
+            <div class="form-row">
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchBrand", (IEnumerable<SelectListItem>)ViewBag.searchBrand, new { onChange = "selectBrand()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchCom", (IEnumerable<SelectListItem>)ViewBag.searchCom, new { onChange = "selectCom()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchStore", (IEnumerable<SelectListItem>)ViewBag.searchStore, @MarketSite.App_GlobalResources.Resource.All, new { onChange = "this.form.submit()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchYear", (IEnumerable<SelectListItem>)ViewBag.searchYear, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    <input class="col-sm-auto btn btn-primary" type="submit" value="@MarketSite.App_GlobalResources.Resource.Inquiry" />
+                </div>
+                <div class="col-sm-auto">
+                    <input type="button" class="col-sm-auto btn btn-success" value="Excel" onclick="download();" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<p></p>
+
+@if (Model != null)
+{
+    <table class="table" id="exportExcel">
+        <tr>
+            <th>店號</th>
+            <th>店名</th>
+            <th>1月</th>
+            <th>2月</th>
+            <th>3月</th>
+            <th>4月</th>
+            <th>5月</th>
+            <th>6月</th>
+            <th>7月</th>
+            <th>8月</th>
+            <th>9月</th>
+            <th>10月</th>
+            <th>11月</th>
+            <th>12月</th>
+            <th>年度小計</th>
+            <th>幣別</th>
+            <th>google試算(僅供參考)</th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>                    
+                <td>@Html.DisplayFor(modelItm => item.StoreMonths.StoreId)</td>
+                <td><nobr>@Html.DisplayFor(modelItm => item.StoreMonths.StoreName)</nobr></td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal1, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "1" })</td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal2, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "2" })</td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal3, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "3" })</td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal4, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "4" })</td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal5, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "5" })</td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal6, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "6" })</td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal7, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "7" })</td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal8, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "8" })</td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal9, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "9" })</td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal10, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "10" })</td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal11, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "11" })</td>
+                <td>@Html.ActionLink(item.StoreMonths.SubTotal12, "Details", new { storeId = item.StoreMonths.StoreId, year = ViewBag.year, month = "12" })</td>
+                <td>@Html.DisplayFor(modelItm => item.StoreMonths.YearTotal)</td>
+                <td>@Html.DisplayFor(modelItm => item.StoreMonths.CurrencyName)</td>              
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <td><a href=@item.StoreMonths.URL target="_blank">換算</a></td>
+                }
+                              
+            </tr>
+        }
+
+        @*<tr>
+            <td>@ViewBag.year</td>
+            @foreach (var item in Model)
+            {
+                <td>
+                    @Html.ActionLink(item.StoreYearInfo.SubTotal.ToString(), "Details", new { storeId = ViewBag.storeId, year = ViewBag.year, month = item.Month })
+                </td>
+            }
+            <td>@ViewBag.Total (@ViewBag.CurrencyName)</td>
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <td><a href=@ViewBag.Url target="_blank">google試算(僅供參考)</a></td>
+            }
+        </tr>*@
+
+
+
+    </table>
+}

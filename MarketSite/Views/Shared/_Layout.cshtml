@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - INKISM</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("INKISM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink(@MarketSite.App_GlobalResources.Resource.Home, "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    @*<li>@Html.ActionLink("關於", "About", "Home")</li>
+                    <li>@Html.ActionLink("連絡方式", "Contact", "Home")</li>*@
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">@Html.ActionLink("角色管理", "Index", "RoleAdmin", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("管理使用者", "Index", "UserAdmin", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("Manage"))
+                    {
+                        <li class="nav-item">@Html.ActionLink("關鍵字", "Index", "KeyWord", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                                @MarketSite.App_GlobalResources.Resource.Report
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                @Html.ActionLink(@MarketSite.App_GlobalResources.Resource.DailyReport, "Index", "StoreDay", new { area = "" }, new { @class = "dropdown-item", target = "_blank" })
+                                @Html.ActionLink(@MarketSite.App_GlobalResources.Resource.StoreYear, "Index", "StoreYear", new { area = "" }, new { @class = "dropdown-item", target = "_blank" })
+                                @Html.ActionLink(@MarketSite.App_GlobalResources.Resource.CustomePrice, "Index", "CustomerPrice", new { area = "" }, new { @class = "dropdown-item", target = "_blank" })
+                                @Html.ActionLink(@MarketSite.App_GlobalResources.Resource.StoreProduct, "Index", "StoreProduct", new { area = "" }, new { @class = "dropdown-item", target = "_blank" })
+                                @Html.ActionLink(@MarketSite.App_GlobalResources.Resource.SizeSuger, "Index", "SizeSugar", new { area = "" }, new { @class = "dropdown-item", target = "_blank" })
+                                @Html.ActionLink(@MarketSite.App_GlobalResources.Resource.RankingList, "Index", "RankingList", new { area = "" }, new { @class = "dropdown-item", target = "_blank" })
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                @*@Html.Partial("_SetCulture")*@
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content" style="margin-top:20px;">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - @MarketSite.App_GlobalResources.Resource.Inkism</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)    
+</body>
+</html>
+<script type="text/javascript">
+    function selectBrand() {
+        $("#searchCom").val("");
+        $("#searchStore").val("");
+        $("#formMenu").submit();
+    }
+    function selectCom() {
+        $("#searchStore").val("");
+        $("#formMenu").submit();
+    }
+   
+    function download() {
+        var html = '<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8" /><title>Excel</title>';
+        html += '';
+        html += document.getElementById('exportExcel').outerHTML + '';
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
+
+    //$("#export-excel").click(function () {
+    //    $.post("Controller/ExportExcel.aspx", $("#Form").serialize(), function (data) {
+    //        window.open(data.Data);
+    //    });
+    //});
+
+</script>

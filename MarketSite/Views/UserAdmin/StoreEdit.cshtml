@@ -1,0 +1,84 @@
+﻿@model MarketSite.Models.StoreEditViewModel
+
+@{
+    ViewBag.Title = "店家列表";
+}
+
+<h2>勾選店家</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @*<h4>Edit User Form.</h4>*@
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.Label("店家管理", new { @class = "control-label col-md-2" })
+            
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    @foreach (var item in ViewBag.BrandTab)
+                {
+                        <a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab" href="#@item.BrandID" role="tab" aria-controls="nav-home" aria-selected="true">@item.BrandName</a>
+                    }
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+@foreach (var item in ViewBag.BrandTab)
+{
+    <div class="tab-pane fade " id="@item.BrandID" role="tabpanel" aria-labelledby="nav-home-tab">
+        <table class="col-md-10">
+            <tr>
+                @{
+                    int cnt = 0;
+                    List<MarketSite.Models.AssignedStoreData> stores = ViewBag.Stores;
+
+                    stores = stores
+                            .Where(s => s.StoreBrand == item.BrandID)
+                            .Select(s => s)
+                            .ToList();
+
+
+                    foreach (var store in stores)
+                    {
+                        if (cnt++ % 5 == 0)
+                        {
+                            @:</tr><tr>
+                        }
+                        @:<td>
+                            <input type="checkbox"
+                                   name="selectedStores"
+                                   value="@store.StoreId"
+                                   @(Html.Raw(store.Assigned ? "checked=\"checked\"" : "")) />
+                            @store.StoreName
+                            @:</td>
+                    }
+                    @:</tr>
+                        }
+            </table>
+
+    </div>
+                    }
+        </div>
+                </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="儲存" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("回到列表", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <ul class="navbar-nav navbar-right">
+            <li class="nav-item">
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
+            </li>
+            <li class="nav-item"><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">@MarketSite.App_GlobalResources.Resource.Logout</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="navbar-nav navbar-right">
+        @*<li>@Html.ActionLink("註冊", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        <li class="nav-item">@Html.ActionLink(@MarketSite.App_GlobalResources.Resource.Login, "Login", "Account", routeValues: null, htmlAttributes: new { @class = "nav-link", id = "loginLink" })</li>
+    </ul>
+}

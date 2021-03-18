@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MarketSite.Models.StoreDayRetail>
+
+@{
+    ViewBag.Title = @MarketSite.App_GlobalResources.Resource.DailyRevenue;
+}
+
+<h2>@MarketSite.App_GlobalResources.Resource.DailyRevenue</h2>
+@if (Model != null)
+{
+    <table class="table" style="width:auto;">
+        <tr>
+            <th>
+                @MarketSite.App_GlobalResources.Resource.Date
+            </th>
+            <th>
+                @MarketSite.App_GlobalResources.Resource.Revenue
+            </th>
+            <th>
+                未稅金額
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortDate)  
+                </td>
+                <td style="text-align:right;" >
+                    @Html.DisplayFor(modelItem => item.TotalRetail)
+                </td>
+                <td style="text-align:right;">
+                    @Html.DisplayFor(modelItem => item.NoTaxTotal)
+                </td>
+            </tr>
+        }
+    </table>
+}
+<p>
+    @Html.ActionLink(@MarketSite.App_GlobalResources.Resource.BackList, "Index")
+</p>

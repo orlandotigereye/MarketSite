@@ -1,0 +1,21 @@
+﻿@{
+    string currentController = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToString();
+    string culture = Session["Culture"] == null ? "zh-TW" : Session["Culture"].ToString();
+}
+<select onchange="SelectLang(this.value);">
+    <option>@(Session["CultureName"].ToString())</option>
+    @if (culture == "en-US")
+    {
+        <option value="zh-TW"> 繁體中文 </option>
+    }
+    else
+    {
+        <option value="en-US"> English </option>
+    }
+</select>
+
+<script type="text/javascript">
+    function SelectLang(lang) {
+        location.href= "/@currentController/SetCulture/" + lang;
+    }
+</script>

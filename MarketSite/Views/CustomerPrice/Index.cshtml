@@ -1,0 +1,83 @@
+﻿@model IEnumerable<MarketSite.Models.CustomerPriceViewModel>
+
+@{
+    ViewBag.Title = @MarketSite.App_GlobalResources.Resource.CustomePrice;
+}
+
+<h2>@MarketSite.App_GlobalResources.Resource.CustomePrice</h2>
+
+@using (Html.BeginForm(null, "CustomerPrice", FormMethod.Post, new { id = "formMenu" }))
+{
+    @Html.AntiForgeryToken()
+    <div calss="input-group">
+        <div class="container">
+            <div class="form-row">
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchBrand", (IEnumerable<SelectListItem>)ViewBag.searchBrand, new { onChange = "selectBrand()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchCom", (IEnumerable<SelectListItem>)ViewBag.searchCom, new { onChange = "selectCom()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchStore", (IEnumerable<SelectListItem>)ViewBag.searchStore, @MarketSite.App_GlobalResources.Resource.All, new { onChange = "this.form.submit()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.TextBox("startDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date", @class="form-control" })
+                </div>
+                <div class="col-sm-auto">@MarketSite.App_GlobalResources.Resource.To</div>
+                <div class="col-sm-auto">
+                    @Html.TextBox("endDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date", @class="form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    <input class="col-xl-auto btn btn-primary" type="submit" value="@MarketSite.App_GlobalResources.Resource.Inquiry" />
+                </div>
+                <div class="col-sm-auto">※@MarketSite.App_GlobalResources.Resource.MaxMonth</div>
+            </div>
+        </div>
+    </div>
+}
+<p></p>
+@if (Model != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShowDate)
+            </th>
+            <th style="text-align:right;">
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th style="text-align:right;">
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th style="text-align:right;">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrencyName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShowDate)
+                </td>
+                <td style="text-align:right;">
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td style="text-align:right;">
+                    @Html.DisplayFor(modelItem => item.Customer)
+                </td>
+                <td style="text-align:right;">
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrencyName)
+                </td>
+            </tr>
+        }
+    </table>
+}

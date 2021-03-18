@@ -1,0 +1,54 @@
+﻿@model MarketSite.Models.ExtendUser
+
+@{
+    ViewBag.Title = "詳細資料";
+}
+
+<h2>詳細資料</h2>
+
+<div>
+    <h4>使用者</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            使用者帳號
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ExAccountID)
+        </dd>
+        <dt>
+            使用者名稱
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ExRealName)
+        </dd>
+        <dt>
+            部門單位
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ExDep)
+        </dd>
+    </dl>
+</div>
+<h4>帳號權限</h4>
+@if (ViewBag.RoleNames.Count == 0)
+{
+    <hr />
+    <p>查無角色</p>
+}
+
+<table class="table">
+
+    @foreach (var item in ViewBag.RoleNames)
+    {
+        <tr>
+            <td>
+                @item
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("編輯", "Edit", new { id = Model.ExAccountUUID }) |
+    @Html.ActionLink("回到列表", "Index")
+</p>

@@ -1,0 +1,48 @@
+﻿@model MarketSite.Models.ExtendUser
+
+@{
+    ViewBag.Title = "刪除帳號";
+}
+
+<h2>刪除帳號</h2>
+
+<h3>確定刪除這筆帳號?</h3>
+<div>
+    @*<h4>ExtendUser</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            使用者帳號
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExAccountID)
+        </dd>
+
+        <dt>
+            使用者名稱
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExRealName)
+        </dd>
+
+        <dt>
+            部門單位
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExDep)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-actions no-color">
+            <input type="submit" value="刪除" class="btn btn-default" /> |
+            @Html.ActionLink("回到列表", "Index")
+        </div>
+    }
+</div>

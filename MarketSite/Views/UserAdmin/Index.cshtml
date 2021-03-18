@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MarketSite.Models.ExtendUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>管理使用者</h2>
+
+<div class="text-right">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <p>
+            使用者帳號： @Html.TextBox("searchId", null, new { type = "text" })
+            <input type="submit" value="查詢" />
+        </p>
+    }
+</div>
+
+<p>
+    @Html.ActionLink("新增帳號", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            使用者帳號
+        </th>
+        <th>
+            使用者名稱
+        </th>
+        <th>
+           部門單位
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExAccountID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExRealName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExDep)
+        </td>
+        <td>
+            @Html.ActionLink("編輯", "Edit", new { id=item.ExAccountUUID }) |
+            @Html.ActionLink("詳細資料", "Details", new { id=item.ExAccountUUID }) |
+            @Html.ActionLink("刪除", "Delete", new { id=item.ExAccountUUID })
+        </td>
+    </tr>
+}
+
+</table>

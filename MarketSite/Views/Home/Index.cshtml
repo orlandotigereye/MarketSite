@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = @MarketSite.App_GlobalResources.Resource.Home;
+}
+
+<div class="jumbotron" style='background-image:url("/Content/Images/index_bg.jpg");'>
+    @*<h1 style="color:white" >墨力國際</h1>*@
+    <img src="/Content/Images/logo.png" />
+    <p class="lead"></p>
+        @if (Request.IsAuthenticated)
+        {
+            <div>
+                <div>@Html.ActionLink(@MarketSite.App_GlobalResources.Resource.DailyReport, "Index", "StoreDay", new { area = "" }, new { style = "color:white;font-family:微軟正黑體;font-size:24px", target = "_blank" })</div>
+                <div>@Html.ActionLink(@MarketSite.App_GlobalResources.Resource.StoreYear, "Index", "StoreYear", new { area = "" }, new { style = "color:white;font-family:微軟正黑體;font-size:24px", target = "_blank" })</div>
+                <div>@Html.ActionLink(@MarketSite.App_GlobalResources.Resource.CustomePrice, "Index", "CustomerPrice", new { area = "" }, new { style = "color:white;font-family:微軟正黑體;font-size:24px", target = "_blank" })</div>
+                <div>@Html.ActionLink(@MarketSite.App_GlobalResources.Resource.StoreProduct, "Index", "StoreProduct", new { area = "" }, new { style = "color:white;font-family:微軟正黑體;font-size:24px", target = "_blank" })</div>
+                <div>@Html.ActionLink(@MarketSite.App_GlobalResources.Resource.SizeSuger, "Index", "SizeSugar", new { area = "" }, new { style = "color:white;font-family:微軟正黑體;font-size:24px", target = "_blank" })</div>
+                <div>@Html.ActionLink(@MarketSite.App_GlobalResources.Resource.RankingList, "Index", "RankingList", new { area = "" }, new { style = "color:white;font-family:微軟正黑體;font-size:24px", target = "_blank" })</div>
+            </div>
+        }
+    <p></p>
+    <p><a href="http://www.inkism.com.tw/" class="btn btn-primary btn-lg" target="_blank">@MarketSite.App_GlobalResources.Resource.InkismSite &raquo;</a></p>
+</div>
+
+@*<div class="row">
+    <div class="col-md-4">
+        <h2></h2>
+        <p>
+        </p>
+        <p><a class="btn btn-default" href="http://www.inkism.com.tw/">墨力官網 &raquo;</a></p>
+    </div>
+</div>*@

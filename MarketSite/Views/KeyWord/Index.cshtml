@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MarketSite.Models.ExtendKeyWord>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>關鍵字</h2>
+
+<p>
+    @Html.ActionLink("新增", "Create")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+                @Html.DisplayNameFor(model => model.category)
+            </th>*@
+        <th>
+            關鍵字
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.category)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.keyword)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>*@
+            <td>
+                @Html.ActionLink("編輯", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("刪除", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

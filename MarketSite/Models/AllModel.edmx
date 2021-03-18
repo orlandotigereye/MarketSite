@@ -1,0 +1,1417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InkismMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="EMail" Type="nvarchar" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="DataGroup" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastLoginTime" Type="datetime" />
+          <Property Name="WebLastLoginTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AccountAppPermission">
+          <Key>
+            <PropertyRef Name="AccountID" />
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="AccountID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ProgramID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PermissionDetail" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="AccountWebPermission">
+          <Key>
+            <PropertyRef Name="AccountID" />
+            <PropertyRef Name="PermissionName" />
+          </Key>
+          <Property Name="AccountID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PermissionName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UseAll" Type="tinyint" Nullable="false" />
+          <Property Name="PermissionDetail" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppProgram">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ParentID" Type="nvarchar" MaxLength="10" />
+          <Property Name="OrderIndex" Type="int" />
+          <Property Name="ProgramName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProgramDescription" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DvrInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DvrName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DvrIP" Type="nvarchar" MaxLength="20" />
+          <Property Name="DvrPort" Type="int" />
+          <Property Name="DvrUser" Type="nvarchar" MaxLength="20" />
+          <Property Name="DvrPassword" Type="nvarchar" MaxLength="20" />
+          <Property Name="DvrBrand" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ErpItem">
+          <Key>
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UseYiFang" Type="tinyint" />
+          <Property Name="UseGP" Type="tinyint" />
+          <Property Name="UseHwanghak" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="ESunBank">
+          <Key>
+            <PropertyRef Name="RecvDateTime" />
+          </Key>
+          <Property Name="RecvDateTime" Type="datetime" Nullable="false" />
+          <Property Name="RemoteIP" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Data" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ToOrderWebResult" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="ToTestOrderWebResult" Type="nvarchar" MaxLength="1024" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExchangeRate">
+          <Key>
+            <PropertyRef Name="CurrencyID" />
+          </Key>
+          <Property Name="CurrencyID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ChtName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EngName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BuyRate" Type="decimal" Precision="8" Scale="5" Nullable="false" />
+          <Property Name="SellRate" Type="decimal" Precision="8" Scale="5" Nullable="false" />
+          <Property Name="LastUpdateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExtendKeyWord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category" Type="nvarchar" MaxLength="10" />
+          <Property Name="keyword" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="int" />
+        </EntityType>
+        <EntityType Name="ExtendLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Refer" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Destination" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RequestTime" Type="datetime" Nullable="false" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Operator" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExtendRole">
+          <Key>
+            <PropertyRef Name="ExRoleUUID" />
+          </Key>
+          <Property Name="ExRoleUUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ExRoleName" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExtendUser">
+          <Key>
+            <PropertyRef Name="ExAccountUUID" />
+          </Key>
+          <Property Name="ExAccountUUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ExAccountID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ExPassword" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ExRealName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ExDep" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExtendUserRole">
+          <Key>
+            <PropertyRef Name="ExAccountUUID" />
+            <PropertyRef Name="ExRoleUUID" />
+          </Key>
+          <Property Name="ExAccountUUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ExRoleUUID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExtendUserStoreCom">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ComId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ComId" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExtendUserStoreData">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StoreId" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INVTC_BAK">
+          <Key>
+            <PropertyRef Name="VersionNo" />
+          </Key>
+          <Property Name="VersionNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DraftDate" Type="varchar" MaxLength="20" />
+          <Property Name="BackupDateTime" Type="datetime" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="10" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Memo" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="INVTC_DATA">
+          <Key>
+            <PropertyRef Name="VersionNo" />
+            <PropertyRef Name="TC001" />
+            <PropertyRef Name="TC002" />
+          </Key>
+          <Property Name="VersionNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TC001" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TC002" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="TC003" Type="nvarchar" MaxLength="40" />
+          <Property Name="TC004" Type="nvarchar" MaxLength="10" />
+          <Property Name="TC008" Type="numeric" Precision="12" Scale="3" />
+        </EntityType>
+        <EntityType Name="Retail">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="OrderNo" />
+            <PropertyRef Name="OrderDateTime" />
+          </Key>
+          <Property Name="StoreNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderNo" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="OrderDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Cash" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="CreditCard" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="EasyCard" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="LinePay" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Coupon" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="SubPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="ServiceCharge" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Adult" Type="int" Nullable="false" />
+          <Property Name="Child" Type="int" Nullable="false" />
+          <Property Name="IsCancel" Type="tinyint" Nullable="false" />
+          <Property Name="DataSource" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderType" Type="nvarchar" MaxLength="10" />
+          <Property Name="RetailDate" Type="date" />
+          <Property Name="UberEats" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="FoodPanda" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="Deliveroo" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="iPass" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="iCash" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="HappyCash" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="FromAPI" Type="bit" />
+        </EntityType>
+        <EntityType Name="RetailInvoice">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="OrderNo" />
+            <PropertyRef Name="SerialNo" />
+          </Key>
+          <Property Name="StoreNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SerialNo" Type="int" Nullable="false" />
+          <Property Name="InvoiceDateTime" Type="datetime" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InvoiceMoney" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="IsCancel" Type="tinyint" Nullable="false" />
+          <Property Name="Cash" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="EasyCard" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="CreditCard" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="DataSource" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="UCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="FromAPI" Type="bit" Nullable="false" />
+          <Property Name="Tax" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RetailSub">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="OrderNo" />
+            <PropertyRef Name="OrderDateTime" />
+            <PropertyRef Name="SerialNo" />
+          </Key>
+          <Property Name="StoreNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderNo" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="OrderDateTime" Type="datetime" Nullable="false" />
+          <Property Name="SerialNo" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductCount" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="SubPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DataSource" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsCancel" Type="tinyint" />
+          <Property Name="Options" Type="nvarchar" MaxLength="300" />
+          <Property Name="RetailDate" Type="date" />
+          <Property Name="FromAPI" Type="bit" />
+          <Property Name="ProductID" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Sales_Report">
+          <Key>
+            <PropertyRef Name="Sales_Target_ID" />
+          </Key>
+          <Property Name="xID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sales_Target_ID" Type="int" Nullable="false" />
+          <Property Name="StoreNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Sales_Predict" Type="int" />
+          <Property Name="Sales_Real" Type="int" />
+          <Property Name="Sales_Predict_Day" Type="int" />
+          <Property Name="Sales_Predict_Day_Record" Type="int" />
+          <Property Name="Sales_Predict_Night" Type="int" />
+          <Property Name="Sales_Predict_Night_Record" Type="int" />
+          <Property Name="Human_Predict" Type="float" />
+          <Property Name="Human_Real" Type="float" />
+          <Property Name="Human_Predict_Day" Type="float" />
+          <Property Name="Human_Predict_Day_Record" Type="float" />
+          <Property Name="Human_Predict_Night" Type="float" />
+          <Property Name="Human_Predict_Night_Record" Type="float" />
+          <Property Name="Sales_Predict_Total" Type="float" />
+          <Property Name="Sales_Real_Total" Type="float" />
+          <Property Name="StoreName" Type="nvarchar" MaxLength="50" />
+          <Property Name="City_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Morning_Weather" Type="nvarchar(max)" />
+          <Property Name="Evening_Weather" Type="nvarchar(max)" />
+          <Property Name="Daily_Compare" Type="int" />
+          <Property Name="Daily_Percent" Type="float" />
+          <Property Name="CU_Percent" Type="float" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sales_Day_Count" Type="int" />
+          <Property Name="Sales_Night_Count" Type="int" />
+        </EntityType>
+        <EntityType Name="StoreBrand">
+          <Key>
+            <PropertyRef Name="BrandID" />
+          </Key>
+          <Property Name="BrandID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="BrandFullName" Type="nvarchar" MaxLength="30" />
+          <Property Name="BrandFComDep" Type="nvarchar" MaxLength="10" />
+          <Property Name="ManageDep" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="StoreCom">
+          <Key>
+            <PropertyRef Name="ComID" />
+          </Key>
+          <Property Name="ComID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ComBrand" Type="varchar" MaxLength="10" />
+          <Property Name="ComName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StoreData">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+          </Key>
+          <Property Name="StoreNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="StoreErpCom" Type="nvarchar" MaxLength="20" />
+          <Property Name="StoreErpNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="StoreErpTaxNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="StoreErpCustID" Type="nvarchar" MaxLength="10" />
+          <Property Name="StoreBrand" Type="nvarchar" MaxLength="10" />
+          <Property Name="StoreCom" Type="varchar" MaxLength="10" />
+          <Property Name="StoreType" Type="int" Nullable="false" />
+          <Property Name="StoreName" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpeningDate" Type="date" />
+          <Property Name="ClosingDate" Type="date" />
+          <Property Name="Closed" Type="tinyint" />
+          <Property Name="CurrencyID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="LatLng" Type="nvarchar" MaxLength="50" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="10" />
+          <Property Name="Manager1" Type="nvarchar" MaxLength="10" />
+          <Property Name="Manager2" Type="nvarchar" MaxLength="10" />
+          <Property Name="RetailDataAPIToken" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StoreDayRetail">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="RetailDate" />
+          </Key>
+          <Property Name="StoreNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RetailDate" Type="date" Nullable="false" />
+          <Property Name="TotalRetail" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="OrderCount" Type="int" Nullable="false" />
+          <Property Name="DineIn" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DineInCount" Type="int" Nullable="false" />
+          <Property Name="TakeOut" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TakeOutCount" Type="int" Nullable="false" />
+          <Property Name="TakeSelf" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TakeSelfCount" Type="int" Nullable="false" />
+          <Property Name="Delivery" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DeliveryCount" Type="int" Nullable="false" />
+          <Property Name="DayRetail" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DayCount" Type="int" Nullable="false" />
+          <Property Name="NightRetail" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="NightCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreDayRetailTarget">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="RetailDate" />
+          </Key>
+          <Property Name="StoreNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RetailDate" Type="date" Nullable="false" />
+          <Property Name="DayRetailTarget" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="NightRetailTarget" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DayManHourPredict" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="NightManHourPredict" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="DayManHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="NightManHour" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreManageArea">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreManager">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ManagerName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreMonthRetailKeyIn">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="RetailDate" />
+          </Key>
+          <Property Name="StoreNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RetailDate" Type="date" Nullable="false" />
+          <Property Name="TotalRetail" Type="decimal" Precision="12" Scale="4" />
+        </EntityType>
+        <EntityType Name="TAXI01_Bak">
+          <Key>
+            <PropertyRef Name="ErpCom" />
+            <PropertyRef Name="MC001" />
+            <PropertyRef Name="MC002" />
+            <PropertyRef Name="MC006" />
+          </Key>
+          <Property Name="ErpCom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MC001" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MC002" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MC006" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MC020" Type="nvarchar" MaxLength="50" />
+          <Property Name="MC021" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_dbo_ExtendUserRole_dbo_ExtendRole_ExRoleUUID">
+          <End Role="ExtendRole" Type="Self.ExtendRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ExtendUserRole" Type="Self.ExtendUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExtendRole">
+              <PropertyRef Name="ExRoleUUID" />
+            </Principal>
+            <Dependent Role="ExtendUserRole">
+              <PropertyRef Name="ExRoleUUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExtendUserRole_dbo_ExtendUser_ExAccountUUID">
+          <End Role="ExtendUser" Type="Self.ExtendUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ExtendUserRole" Type="Self.ExtendUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExtendUser">
+              <PropertyRef Name="ExAccountUUID" />
+            </Principal>
+            <Dependent Role="ExtendUserRole">
+              <PropertyRef Name="ExAccountUUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExtendUserStoreCom_dbo_ExtendUser_UserId">
+          <End Role="ExtendUser" Type="Self.ExtendUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ExtendUserStoreCom" Type="Self.ExtendUserStoreCom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExtendUser">
+              <PropertyRef Name="ExAccountUUID" />
+            </Principal>
+            <Dependent Role="ExtendUserStoreCom">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExtendUserStoreCom_dbo_StoreCom_ComID">
+          <End Role="StoreCom" Type="Self.StoreCom" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ExtendUserStoreCom" Type="Self.ExtendUserStoreCom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreCom">
+              <PropertyRef Name="ComID" />
+            </Principal>
+            <Dependent Role="ExtendUserStoreCom">
+              <PropertyRef Name="ComId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExtendUserStoreData_dbo_ExtendUser_UserId">
+          <End Role="ExtendUser" Type="Self.ExtendUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ExtendUserStoreData" Type="Self.ExtendUserStoreData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExtendUser">
+              <PropertyRef Name="ExAccountUUID" />
+            </Principal>
+            <Dependent Role="ExtendUserStoreData">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExtendUserStoreData_dbo_StoreData_StoreId">
+          <End Role="StoreData" Type="Self.StoreData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ExtendUserStoreData" Type="Self.ExtendUserStoreData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreData">
+              <PropertyRef Name="StoreNo" />
+            </Principal>
+            <Dependent Role="ExtendUserStoreData">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InkismMISModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountAppPermission" EntityType="Self.AccountAppPermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountWebPermission" EntityType="Self.AccountWebPermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppProgram" EntityType="Self.AppProgram" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DvrInfo" EntityType="Self.DvrInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErpItem" EntityType="Self.ErpItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESunBank" EntityType="Self.ESunBank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExchangeRate" EntityType="Self.ExchangeRate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtendKeyWord" EntityType="Self.ExtendKeyWord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtendLog" EntityType="Self.ExtendLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtendRole" EntityType="Self.ExtendRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtendUser" EntityType="Self.ExtendUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtendUserRole" EntityType="Self.ExtendUserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtendUserStoreCom" EntityType="Self.ExtendUserStoreCom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtendUserStoreData" EntityType="Self.ExtendUserStoreData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVTC_BAK" EntityType="Self.INVTC_BAK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVTC_DATA" EntityType="Self.INVTC_DATA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Retail" EntityType="Self.Retail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RetailInvoice" EntityType="Self.RetailInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RetailSub" EntityType="Self.RetailSub" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales_Report" EntityType="Self.Sales_Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreBrand" EntityType="Self.StoreBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreCom" EntityType="Self.StoreCom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreData" EntityType="Self.StoreData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreDayRetail" EntityType="Self.StoreDayRetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreDayRetailTarget" EntityType="Self.StoreDayRetailTarget" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreManageArea" EntityType="Self.StoreManageArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreManager" EntityType="Self.StoreManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreMonthRetailKeyIn" EntityType="Self.StoreMonthRetailKeyIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAXI01_Bak" EntityType="Self.TAXI01_Bak" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_ExtendUserRole_dbo_ExtendRole_ExRoleUUID" Association="Self.FK_dbo_ExtendUserRole_dbo_ExtendRole_ExRoleUUID">
+            <End Role="ExtendRole" EntitySet="ExtendRole" />
+            <End Role="ExtendUserRole" EntitySet="ExtendUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExtendUserRole_dbo_ExtendUser_ExAccountUUID" Association="Self.FK_dbo_ExtendUserRole_dbo_ExtendUser_ExAccountUUID">
+            <End Role="ExtendUser" EntitySet="ExtendUser" />
+            <End Role="ExtendUserRole" EntitySet="ExtendUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExtendUserStoreCom_dbo_ExtendUser_UserId" Association="Self.FK_dbo_ExtendUserStoreCom_dbo_ExtendUser_UserId">
+            <End Role="ExtendUser" EntitySet="ExtendUser" />
+            <End Role="ExtendUserStoreCom" EntitySet="ExtendUserStoreCom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExtendUserStoreCom_dbo_StoreCom_ComID" Association="Self.FK_dbo_ExtendUserStoreCom_dbo_StoreCom_ComID">
+            <End Role="StoreCom" EntitySet="StoreCom" />
+            <End Role="ExtendUserStoreCom" EntitySet="ExtendUserStoreCom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExtendUserStoreData_dbo_ExtendUser_UserId" Association="Self.FK_dbo_ExtendUserStoreData_dbo_ExtendUser_UserId">
+            <End Role="ExtendUser" EntitySet="ExtendUser" />
+            <End Role="ExtendUserStoreData" EntitySet="ExtendUserStoreData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExtendUserStoreData_dbo_StoreData_StoreId" Association="Self.FK_dbo_ExtendUserStoreData_dbo_StoreData_StoreId">
+            <End Role="StoreData" EntitySet="StoreData" />
+            <End Role="ExtendUserStoreData" EntitySet="ExtendUserStoreData" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InkismMISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EMail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RealName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DataGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastLoginTime" Type="DateTime" Precision="3" />
+          <Property Name="WebLastLoginTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="AccountAppPermission">
+          <Key>
+            <PropertyRef Name="AccountID" />
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="AccountID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProgramID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PermissionDetail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AccountWebPermission">
+          <Key>
+            <PropertyRef Name="AccountID" />
+            <PropertyRef Name="PermissionName" />
+          </Key>
+          <Property Name="AccountID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PermissionName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UseAll" Type="Byte" Nullable="false" />
+          <Property Name="PermissionDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppProgram">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="OrderIndex" Type="Int32" />
+          <Property Name="ProgramName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProgramDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DvrInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DvrName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DvrIP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DvrPort" Type="Int32" />
+          <Property Name="DvrUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DvrPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DvrBrand" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ErpItem">
+          <Key>
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="ItemNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UseYiFang" Type="Byte" />
+          <Property Name="UseGP" Type="Byte" />
+          <Property Name="UseHwanghak" Type="Byte" />
+        </EntityType>
+        <EntityType Name="ESunBank">
+          <Key>
+            <PropertyRef Name="RecvDateTime" />
+          </Key>
+          <Property Name="RecvDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RemoteIP" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Data" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ToOrderWebResult" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="ToTestOrderWebResult" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ExchangeRate">
+          <Key>
+            <PropertyRef Name="CurrencyID" />
+          </Key>
+          <Property Name="CurrencyID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChtName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EngName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BuyRate" Type="Decimal" Precision="8" Scale="5" Nullable="false" />
+          <Property Name="SellRate" Type="Decimal" Precision="8" Scale="5" Nullable="false" />
+          <Property Name="LastUpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ExtendLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Refer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Destination" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequestTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IPAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Operator" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExtendRole">
+          <Key>
+            <PropertyRef Name="ExRoleUUID" />
+          </Key>
+          <Property Name="ExRoleUUID" Type="Guid" Nullable="false" />
+          <Property Name="ExRoleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ExtendUser" Relationship="Self.ExtendUserRole" FromRole="ExtendRole" ToRole="ExtendUser" />
+        </EntityType>
+        <EntityType Name="ExtendUser">
+          <Key>
+            <PropertyRef Name="ExAccountUUID" />
+          </Key>
+          <Property Name="ExAccountUUID" Type="Guid" Nullable="false" />
+          <Property Name="ExAccountID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExRealName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExDep" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ExtendRole" Relationship="Self.ExtendUserRole" FromRole="ExtendUser" ToRole="ExtendRole" />
+          <NavigationProperty Name="StoreCom" Relationship="Self.ExtendUserStoreCom" FromRole="ExtendUser" ToRole="StoreCom" />
+          <NavigationProperty Name="StoreData" Relationship="Self.ExtendUserStoreData" FromRole="ExtendUser" ToRole="StoreData" />
+        </EntityType>
+        <EntityType Name="INVTC_BAK">
+          <Key>
+            <PropertyRef Name="VersionNo" />
+          </Key>
+          <Property Name="VersionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DraftDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BackupDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Memo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="INVTC_DATA">
+          <Key>
+            <PropertyRef Name="VersionNo" />
+            <PropertyRef Name="TC001" />
+            <PropertyRef Name="TC002" />
+          </Key>
+          <Property Name="VersionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TC001" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TC002" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TC003" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="TC004" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TC008" Type="Decimal" Precision="12" Scale="3" />
+        </EntityType>
+        <EntityType Name="RetailInvoice">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="OrderNo" />
+            <PropertyRef Name="SerialNo" />
+          </Key>
+          <Property Name="StoreNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SerialNo" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InvoiceMoney" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="IsCancel" Type="Byte" Nullable="false" />
+          <Property Name="Cash" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="CreditCard" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="DataSource" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EasyCard" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="UCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FromAPI" Type="Boolean" Nullable="false" />
+          <Property Name="Tax" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="RetailSub">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="OrderNo" />
+            <PropertyRef Name="OrderDateTime" />
+            <PropertyRef Name="SerialNo" />
+          </Key>
+          <Property Name="StoreNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SerialNo" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductCount" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="SubPrice" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DataSource" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsCancel" Type="Byte" />
+          <Property Name="Options" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="RetailDate" Type="DateTime" Precision="0" />
+          <Property Name="FromAPI" Type="Boolean" />
+          <Property Name="ProductID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sales_Report">
+          <Key>
+            <PropertyRef Name="Sales_Target_ID" />
+          </Key>
+          <Property Name="xID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sales_Target_ID" Type="Int32" Nullable="false" />
+          <Property Name="StoreNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sales_Predict" Type="Int32" />
+          <Property Name="Sales_Real" Type="Int32" />
+          <Property Name="Sales_Predict_Day" Type="Int32" />
+          <Property Name="Sales_Predict_Day_Record" Type="Int32" />
+          <Property Name="Sales_Predict_Night" Type="Int32" />
+          <Property Name="Sales_Predict_Night_Record" Type="Int32" />
+          <Property Name="Human_Predict" Type="Double" />
+          <Property Name="Human_Real" Type="Double" />
+          <Property Name="Human_Predict_Day" Type="Double" />
+          <Property Name="Human_Predict_Day_Record" Type="Double" />
+          <Property Name="Human_Predict_Night" Type="Double" />
+          <Property Name="Human_Predict_Night_Record" Type="Double" />
+          <Property Name="Sales_Predict_Total" Type="Double" />
+          <Property Name="Sales_Real_Total" Type="Double" />
+          <Property Name="StoreName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Morning_Weather" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Evening_Weather" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Daily_Compare" Type="Int32" />
+          <Property Name="Daily_Percent" Type="Double" />
+          <Property Name="CU_Percent" Type="Double" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sales_Day_Count" Type="Int32" />
+          <Property Name="Sales_Night_Count" Type="Int32" />
+        </EntityType>
+        <EntityType Name="StoreBrand">
+          <Key>
+            <PropertyRef Name="BrandID" />
+          </Key>
+          <Property Name="BrandID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BrandName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BrandFullName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="BrandFComDep" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ManageDep" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StoreCom">
+          <Key>
+            <PropertyRef Name="ComID" />
+          </Key>
+          <Property Name="ComID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ComBrand" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ComName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ExtendUser" Relationship="Self.ExtendUserStoreCom" FromRole="StoreCom" ToRole="ExtendUser" />
+        </EntityType>
+        <EntityType Name="StoreData">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+          </Key>
+          <Property Name="StoreNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StoreErpNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="StoreErpTaxNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="StoreErpCustID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="StoreBrand" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="StoreCom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="StoreType" Type="Int32" Nullable="false" />
+          <Property Name="StoreName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpeningDate" Type="DateTime" Precision="0" />
+          <Property Name="Closed" Type="Byte" />
+          <Property Name="CurrencyID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LatLng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AreaName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Manager1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Manager2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ExtendUser" Relationship="Self.ExtendUserStoreData" FromRole="StoreData" ToRole="ExtendUser" />
+          <Property Name="ClosingDate" Type="DateTime" Precision="0" />
+          <Property Name="StoreErpCom" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RetailDataAPIToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StoreDayRetail">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="RetailDate" />
+          </Key>
+          <Property Name="StoreNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RetailDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TotalRetail" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="OrderCount" Type="Int32" Nullable="false" />
+          <Property Name="DineIn" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DineInCount" Type="Int32" Nullable="false" />
+          <Property Name="TakeOut" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TakeOutCount" Type="Int32" Nullable="false" />
+          <Property Name="TakeSelf" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="TakeSelfCount" Type="Int32" Nullable="false" />
+          <Property Name="Delivery" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DeliveryCount" Type="Int32" Nullable="false" />
+          <Property Name="DayRetail" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DayCount" Type="Int32" Nullable="false" />
+          <Property Name="NightRetail" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="NightCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreDayRetailTarget">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="RetailDate" />
+          </Key>
+          <Property Name="StoreNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RetailDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DayRetailTarget" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="NightRetailTarget" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DayManHourPredict" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="NightManHourPredict" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="DayManHour" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="NightManHour" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreManageArea">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AreaName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreManager">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ManagerName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAXI01_Bak">
+          <Key>
+            <PropertyRef Name="ErpCom" />
+            <PropertyRef Name="MC001" />
+            <PropertyRef Name="MC002" />
+            <PropertyRef Name="MC006" />
+          </Key>
+          <Property Name="ErpCom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MC001" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MC002" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MC006" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MC020" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MC021" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="ExtendUserRole">
+          <End Role="ExtendRole" Type="Self.ExtendRole" Multiplicity="*" />
+          <End Role="ExtendUser" Type="Self.ExtendUser" Multiplicity="*" />
+        </Association>
+        <Association Name="ExtendUserStoreCom">
+          <End Role="ExtendUser" Type="Self.ExtendUser" Multiplicity="*" />
+          <End Role="StoreCom" Type="Self.StoreCom" Multiplicity="*" />
+        </Association>
+        <Association Name="ExtendUserStoreData">
+          <End Role="ExtendUser" Type="Self.ExtendUser" Multiplicity="*" />
+          <End Role="StoreData" Type="Self.StoreData" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="InkismMISEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="AccountAppPermission" EntityType="Self.AccountAppPermission" />
+          <EntitySet Name="AccountWebPermission" EntityType="Self.AccountWebPermission" />
+          <EntitySet Name="AppProgram" EntityType="Self.AppProgram" />
+          <EntitySet Name="DvrInfo" EntityType="Self.DvrInfo" />
+          <EntitySet Name="ErpItem" EntityType="Self.ErpItem" />
+          <EntitySet Name="ESunBank" EntityType="Self.ESunBank" />
+          <EntitySet Name="ExchangeRate" EntityType="Self.ExchangeRate" />
+          <EntitySet Name="ExtendLog" EntityType="Self.ExtendLog" />
+          <EntitySet Name="ExtendRole" EntityType="Self.ExtendRole" />
+          <EntitySet Name="ExtendUser" EntityType="Self.ExtendUser" />
+          <EntitySet Name="INVTC_BAK" EntityType="Self.INVTC_BAK" />
+          <EntitySet Name="INVTC_DATA" EntityType="Self.INVTC_DATA" />
+          <EntitySet Name="RetailInvoice" EntityType="Self.RetailInvoice" />
+          <EntitySet Name="RetailSub" EntityType="Self.RetailSub" />
+          <EntitySet Name="Sales_Report" EntityType="Self.Sales_Report" />
+          <EntitySet Name="StoreBrand" EntityType="Self.StoreBrand" />
+          <EntitySet Name="StoreCom" EntityType="Self.StoreCom" />
+          <EntitySet Name="StoreData" EntityType="Self.StoreData" />
+          <EntitySet Name="StoreDayRetail" EntityType="Self.StoreDayRetail" />
+          <EntitySet Name="StoreDayRetailTarget" EntityType="Self.StoreDayRetailTarget" />
+          <EntitySet Name="StoreManageArea" EntityType="Self.StoreManageArea" />
+          <EntitySet Name="StoreManager" EntityType="Self.StoreManager" />
+          <EntitySet Name="TAXI01_Bak" EntityType="Self.TAXI01_Bak" />
+          <AssociationSet Name="ExtendUserRole" Association="Self.ExtendUserRole">
+            <End Role="ExtendRole" EntitySet="ExtendRole" />
+            <End Role="ExtendUser" EntitySet="ExtendUser" />
+          </AssociationSet>
+          <AssociationSet Name="ExtendUserStoreCom" Association="Self.ExtendUserStoreCom">
+            <End Role="ExtendUser" EntitySet="ExtendUser" />
+            <End Role="StoreCom" EntitySet="StoreCom" />
+          </AssociationSet>
+          <AssociationSet Name="ExtendUserStoreData" Association="Self.ExtendUserStoreData">
+            <End Role="ExtendUser" EntitySet="ExtendUser" />
+            <End Role="StoreData" EntitySet="StoreData" />
+          </AssociationSet>
+          <EntitySet Name="Retail" EntityType="InkismMISModel.Retail" />
+          <EntitySet Name="ExtendKeyWord" EntityType="InkismMISModel.ExtendKeyWord" />
+          <EntitySet Name="StoreMonthRetailKeyIn" EntityType="InkismMISModel.StoreMonthRetailKeyIn" />
+        </EntityContainer>
+        <EntityType Name="Retail">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="OrderNo" />
+            <PropertyRef Name="OrderDateTime" />
+          </Key>
+          <Property Name="StoreNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OrderDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Cash" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="CreditCard" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="EasyCard" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="LinePay" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Coupon" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="SubPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="ServiceCharge" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="Adult" Type="Int32" Nullable="false" />
+          <Property Name="Child" Type="Int32" Nullable="false" />
+          <Property Name="IsCancel" Type="Byte" Nullable="false" />
+          <Property Name="DataSource" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RetailDate" Type="DateTime" Precision="0" />
+          <Property Name="UberEats" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="FoodPanda" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Deliveroo" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="iPass" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="iCash" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="HappyCash" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="FromAPI" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ExtendKeyWord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="keyword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="StoreMonthRetailKeyIn">
+          <Key>
+            <PropertyRef Name="StoreNo" />
+            <PropertyRef Name="RetailDate" />
+          </Key>
+          <Property Name="StoreNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RetailDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TotalRetail" Type="Decimal" Precision="12" Scale="4" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InkismMISModelStoreContainer" CdmEntityContainer="InkismMISEntities">
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="InkismMISModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DataGroup" ColumnName="DataGroup" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="WebLastLoginTime" ColumnName="WebLastLoginTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountAppPermission">
+            <EntityTypeMapping TypeName="InkismMISModel.AccountAppPermission">
+              <MappingFragment StoreEntitySet="AccountAppPermission">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="PermissionDetail" ColumnName="PermissionDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountWebPermission">
+            <EntityTypeMapping TypeName="InkismMISModel.AccountWebPermission">
+              <MappingFragment StoreEntitySet="AccountWebPermission">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+                <ScalarProperty Name="UseAll" ColumnName="UseAll" />
+                <ScalarProperty Name="PermissionDetail" ColumnName="PermissionDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppProgram">
+            <EntityTypeMapping TypeName="InkismMISModel.AppProgram">
+              <MappingFragment StoreEntitySet="AppProgram">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="OrderIndex" ColumnName="OrderIndex" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="ProgramDescription" ColumnName="ProgramDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DvrInfo">
+            <EntityTypeMapping TypeName="InkismMISModel.DvrInfo">
+              <MappingFragment StoreEntitySet="DvrInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DvrName" ColumnName="DvrName" />
+                <ScalarProperty Name="DvrIP" ColumnName="DvrIP" />
+                <ScalarProperty Name="DvrPort" ColumnName="DvrPort" />
+                <ScalarProperty Name="DvrUser" ColumnName="DvrUser" />
+                <ScalarProperty Name="DvrPassword" ColumnName="DvrPassword" />
+                <ScalarProperty Name="DvrBrand" ColumnName="DvrBrand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErpItem">
+            <EntityTypeMapping TypeName="InkismMISModel.ErpItem">
+              <MappingFragment StoreEntitySet="ErpItem">
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="UseYiFang" ColumnName="UseYiFang" />
+                <ScalarProperty Name="UseGP" ColumnName="UseGP" />
+                <ScalarProperty Name="UseHwanghak" ColumnName="UseHwanghak" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESunBank">
+            <EntityTypeMapping TypeName="InkismMISModel.ESunBank">
+              <MappingFragment StoreEntitySet="ESunBank">
+                <ScalarProperty Name="ToTestOrderWebResult" ColumnName="ToTestOrderWebResult" />
+                <ScalarProperty Name="ToOrderWebResult" ColumnName="ToOrderWebResult" />
+                <ScalarProperty Name="RecvDateTime" ColumnName="RecvDateTime" />
+                <ScalarProperty Name="RemoteIP" ColumnName="RemoteIP" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExchangeRate">
+            <EntityTypeMapping TypeName="InkismMISModel.ExchangeRate">
+              <MappingFragment StoreEntitySet="ExchangeRate">
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+                <ScalarProperty Name="ChtName" ColumnName="ChtName" />
+                <ScalarProperty Name="EngName" ColumnName="EngName" />
+                <ScalarProperty Name="BuyRate" ColumnName="BuyRate" />
+                <ScalarProperty Name="SellRate" ColumnName="SellRate" />
+                <ScalarProperty Name="LastUpdateDateTime" ColumnName="LastUpdateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExtendLog">
+            <EntityTypeMapping TypeName="InkismMISModel.ExtendLog">
+              <MappingFragment StoreEntitySet="ExtendLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Refer" ColumnName="Refer" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="RequestTime" ColumnName="RequestTime" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExtendRole">
+            <EntityTypeMapping TypeName="InkismMISModel.ExtendRole">
+              <MappingFragment StoreEntitySet="ExtendRole">
+                <ScalarProperty Name="ExRoleUUID" ColumnName="ExRoleUUID" />
+                <ScalarProperty Name="ExRoleName" ColumnName="ExRoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExtendUser">
+            <EntityTypeMapping TypeName="InkismMISModel.ExtendUser">
+              <MappingFragment StoreEntitySet="ExtendUser">
+                <ScalarProperty Name="ExAccountUUID" ColumnName="ExAccountUUID" />
+                <ScalarProperty Name="ExAccountID" ColumnName="ExAccountID" />
+                <ScalarProperty Name="ExPassword" ColumnName="ExPassword" />
+                <ScalarProperty Name="ExRealName" ColumnName="ExRealName" />
+                <ScalarProperty Name="ExDep" ColumnName="ExDep" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVTC_BAK">
+            <EntityTypeMapping TypeName="InkismMISModel.INVTC_BAK">
+              <MappingFragment StoreEntitySet="INVTC_BAK">
+                <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+                <ScalarProperty Name="DraftDate" ColumnName="DraftDate" />
+                <ScalarProperty Name="BackupDateTime" ColumnName="BackupDateTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVTC_DATA">
+            <EntityTypeMapping TypeName="InkismMISModel.INVTC_DATA">
+              <MappingFragment StoreEntitySet="INVTC_DATA">
+                <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+                <ScalarProperty Name="TC001" ColumnName="TC001" />
+                <ScalarProperty Name="TC002" ColumnName="TC002" />
+                <ScalarProperty Name="TC003" ColumnName="TC003" />
+                <ScalarProperty Name="TC004" ColumnName="TC004" />
+                <ScalarProperty Name="TC008" ColumnName="TC008" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RetailInvoice">
+            <EntityTypeMapping TypeName="InkismMISModel.RetailInvoice">
+              <MappingFragment StoreEntitySet="RetailInvoice">
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="FromAPI" ColumnName="FromAPI" />
+                <ScalarProperty Name="UCode" ColumnName="UCode" />
+                <ScalarProperty Name="EasyCard" ColumnName="EasyCard" />
+                <ScalarProperty Name="StoreNo" ColumnName="StoreNo" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+                <ScalarProperty Name="InvoiceDateTime" ColumnName="InvoiceDateTime" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="InvoiceMoney" ColumnName="InvoiceMoney" />
+                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+                <ScalarProperty Name="Cash" ColumnName="Cash" />
+                <ScalarProperty Name="CreditCard" ColumnName="CreditCard" />
+                <ScalarProperty Name="DataSource" ColumnName="DataSource" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RetailSub">
+            <EntityTypeMapping TypeName="InkismMISModel.RetailSub">
+              <MappingFragment StoreEntitySet="RetailSub">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="FromAPI" ColumnName="FromAPI" />
+                <ScalarProperty Name="StoreNo" ColumnName="StoreNo" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="OrderDateTime" ColumnName="OrderDateTime" />
+                <ScalarProperty Name="SerialNo" ColumnName="SerialNo" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductCount" ColumnName="ProductCount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SubPrice" ColumnName="SubPrice" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="DataSource" ColumnName="DataSource" />
+                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+                <ScalarProperty Name="Options" ColumnName="Options" />
+                <ScalarProperty Name="RetailDate" ColumnName="RetailDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales_Report">
+            <EntityTypeMapping TypeName="InkismMISModel.Sales_Report">
+              <MappingFragment StoreEntitySet="Sales_Report">
+                <ScalarProperty Name="xID" ColumnName="xID" />
+                <ScalarProperty Name="Sales_Target_ID" ColumnName="Sales_Target_ID" />
+                <ScalarProperty Name="StoreNo" ColumnName="StoreNo" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Sales_Predict" ColumnName="Sales_Predict" />
+                <ScalarProperty Name="Sales_Real" ColumnName="Sales_Real" />
+                <ScalarProperty Name="Sales_Predict_Day" ColumnName="Sales_Predict_Day" />
+                <ScalarProperty Name="Sales_Predict_Day_Record" ColumnName="Sales_Predict_Day_Record" />
+                <ScalarProperty Name="Sales_Predict_Night" ColumnName="Sales_Predict_Night" />
+                <ScalarProperty Name="Sales_Predict_Night_Record" ColumnName="Sales_Predict_Night_Record" />
+                <ScalarProperty Name="Human_Predict" ColumnName="Human_Predict" />
+                <ScalarProperty Name="Human_Real" ColumnName="Human_Real" />
+                <ScalarProperty Name="Human_Predict_Day" ColumnName="Human_Predict_Day" />
+                <ScalarProperty Name="Human_Predict_Day_Record" ColumnName="Human_Predict_Day_Record" />
+                <ScalarProperty Name="Human_Predict_Night" ColumnName="Human_Predict_Night" />
+                <ScalarProperty Name="Human_Predict_Night_Record" ColumnName="Human_Predict_Night_Record" />
+                <ScalarProperty Name="Sales_Predict_Total" ColumnName="Sales_Predict_Total" />
+                <ScalarProperty Name="Sales_Real_Total" ColumnName="Sales_Real_Total" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="City_Name" ColumnName="City_Name" />
+                <ScalarProperty Name="Morning_Weather" ColumnName="Morning_Weather" />
+                <ScalarProperty Name="Evening_Weather" ColumnName="Evening_Weather" />
+                <ScalarProperty Name="Daily_Compare" ColumnName="Daily_Compare" />
+                <ScalarProperty Name="Daily_Percent" ColumnName="Daily_Percent" />
+                <ScalarProperty Name="CU_Percent" ColumnName="CU_Percent" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Sales_Day_Count" ColumnName="Sales_Day_Count" />
+                <ScalarProperty Name="Sales_Night_Count" ColumnName="Sales_Night_Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreBrand">
+            <EntityTypeMapping TypeName="InkismMISModel.StoreBrand">
+              <MappingFragment StoreEntitySet="StoreBrand">
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="BrandFullName" ColumnName="BrandFullName" />
+                <ScalarProperty Name="BrandFComDep" ColumnName="BrandFComDep" />
+                <ScalarProperty Name="ManageDep" ColumnName="ManageDep" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreCom">
+            <EntityTypeMapping TypeName="InkismMISModel.StoreCom">
+              <MappingFragment StoreEntitySet="StoreCom">
+                <ScalarProperty Name="ComID" ColumnName="ComID" />
+                <ScalarProperty Name="ComBrand" ColumnName="ComBrand" />
+                <ScalarProperty Name="ComName" ColumnName="ComName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreData">
+            <EntityTypeMapping TypeName="InkismMISModel.StoreData">
+              <MappingFragment StoreEntitySet="StoreData">
+                <ScalarProperty Name="RetailDataAPIToken" ColumnName="RetailDataAPIToken" />
+                <ScalarProperty Name="StoreErpCom" ColumnName="StoreErpCom" />
+                <ScalarProperty Name="ClosingDate" ColumnName="ClosingDate" />
+                <ScalarProperty Name="StoreNo" ColumnName="StoreNo" />
+                <ScalarProperty Name="StoreErpNo" ColumnName="StoreErpNo" />
+                <ScalarProperty Name="StoreErpTaxNo" ColumnName="StoreErpTaxNo" />
+                <ScalarProperty Name="StoreErpCustID" ColumnName="StoreErpCustID" />
+                <ScalarProperty Name="StoreBrand" ColumnName="StoreBrand" />
+                <ScalarProperty Name="StoreCom" ColumnName="StoreCom" />
+                <ScalarProperty Name="StoreType" ColumnName="StoreType" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="OpeningDate" ColumnName="OpeningDate" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LatLng" ColumnName="LatLng" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="Manager1" ColumnName="Manager1" />
+                <ScalarProperty Name="Manager2" ColumnName="Manager2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreDayRetail">
+            <EntityTypeMapping TypeName="InkismMISModel.StoreDayRetail">
+              <MappingFragment StoreEntitySet="StoreDayRetail">
+                <ScalarProperty Name="StoreNo" ColumnName="StoreNo" />
+                <ScalarProperty Name="RetailDate" ColumnName="RetailDate" />
+                <ScalarProperty Name="TotalRetail" ColumnName="TotalRetail" />
+                <ScalarProperty Name="OrderCount" ColumnName="OrderCount" />
+                <ScalarProperty Name="DineIn" ColumnName="DineIn" />
+                <ScalarProperty Name="DineInCount" ColumnName="DineInCount" />
+                <ScalarProperty Name="TakeOut" ColumnName="TakeOut" />
+                <ScalarProperty Name="TakeOutCount" ColumnName="TakeOutCount" />
+                <ScalarProperty Name="TakeSelf" ColumnName="TakeSelf" />
+                <ScalarProperty Name="TakeSelfCount" ColumnName="TakeSelfCount" />
+                <ScalarProperty Name="Delivery" ColumnName="Delivery" />
+                <ScalarProperty Name="DeliveryCount" ColumnName="DeliveryCount" />
+                <ScalarProperty Name="DayRetail" ColumnName="DayRetail" />
+                <ScalarProperty Name="DayCount" ColumnName="DayCount" />
+                <ScalarProperty Name="NightRetail" ColumnName="NightRetail" />
+                <ScalarProperty Name="NightCount" ColumnName="NightCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreDayRetailTarget">
+            <EntityTypeMapping TypeName="InkismMISModel.StoreDayRetailTarget">
+              <MappingFragment StoreEntitySet="StoreDayRetailTarget">
+                <ScalarProperty Name="StoreNo" ColumnName="StoreNo" />
+                <ScalarProperty Name="RetailDate" ColumnName="RetailDate" />
+                <ScalarProperty Name="DayRetailTarget" ColumnName="DayRetailTarget" />
+                <ScalarProperty Name="NightRetailTarget" ColumnName="NightRetailTarget" />
+                <ScalarProperty Name="DayManHourPredict" ColumnName="DayManHourPredict" />
+                <ScalarProperty Name="NightManHourPredict" ColumnName="NightManHourPredict" />
+                <ScalarProperty Name="DayManHour" ColumnName="DayManHour" />
+                <ScalarProperty Name="NightManHour" ColumnName="NightManHour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreManageArea">
+            <EntityTypeMapping TypeName="InkismMISModel.StoreManageArea">
+              <MappingFragment StoreEntitySet="StoreManageArea">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreManager">
+            <EntityTypeMapping TypeName="InkismMISModel.StoreManager">
+              <MappingFragment StoreEntitySet="StoreManager">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAXI01_Bak">
+            <EntityTypeMapping TypeName="InkismMISModel.TAXI01_Bak">
+              <MappingFragment StoreEntitySet="TAXI01_Bak">
+                <ScalarProperty Name="ErpCom" ColumnName="ErpCom" />
+                <ScalarProperty Name="MC001" ColumnName="MC001" />
+                <ScalarProperty Name="MC002" ColumnName="MC002" />
+                <ScalarProperty Name="MC006" ColumnName="MC006" />
+                <ScalarProperty Name="MC020" ColumnName="MC020" />
+                <ScalarProperty Name="MC021" ColumnName="MC021" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ExtendUserRole" TypeName="InkismMISModel.ExtendUserRole" StoreEntitySet="ExtendUserRole">
+            <EndProperty Name="ExtendRole">
+              <ScalarProperty Name="ExRoleUUID" ColumnName="ExRoleUUID" />
+            </EndProperty>
+            <EndProperty Name="ExtendUser">
+              <ScalarProperty Name="ExAccountUUID" ColumnName="ExAccountUUID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ExtendUserStoreCom" TypeName="InkismMISModel.ExtendUserStoreCom" StoreEntitySet="ExtendUserStoreCom">
+            <EndProperty Name="ExtendUser">
+              <ScalarProperty Name="ExAccountUUID" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="StoreCom">
+              <ScalarProperty Name="ComID" ColumnName="ComId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ExtendUserStoreData" TypeName="InkismMISModel.ExtendUserStoreData" StoreEntitySet="ExtendUserStoreData">
+            <EndProperty Name="ExtendUser">
+              <ScalarProperty Name="ExAccountUUID" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="StoreData">
+              <ScalarProperty Name="StoreNo" ColumnName="StoreId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Retail">
+            <EntityTypeMapping TypeName="InkismMISModel.Retail">
+              <MappingFragment StoreEntitySet="Retail">
+                <ScalarProperty Name="FromAPI" ColumnName="FromAPI" />
+                <ScalarProperty Name="HappyCash" ColumnName="HappyCash" />
+                <ScalarProperty Name="iCash" ColumnName="iCash" />
+                <ScalarProperty Name="iPass" ColumnName="iPass" />
+                <ScalarProperty Name="Deliveroo" ColumnName="Deliveroo" />
+                <ScalarProperty Name="FoodPanda" ColumnName="FoodPanda" />
+                <ScalarProperty Name="UberEats" ColumnName="UberEats" />
+                <ScalarProperty Name="RetailDate" ColumnName="RetailDate" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="DataSource" ColumnName="DataSource" />
+                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+                <ScalarProperty Name="Child" ColumnName="Child" />
+                <ScalarProperty Name="Adult" ColumnName="Adult" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="ServiceCharge" ColumnName="ServiceCharge" />
+                <ScalarProperty Name="SubPrice" ColumnName="SubPrice" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Coupon" ColumnName="Coupon" />
+                <ScalarProperty Name="LinePay" ColumnName="LinePay" />
+                <ScalarProperty Name="EasyCard" ColumnName="EasyCard" />
+                <ScalarProperty Name="CreditCard" ColumnName="CreditCard" />
+                <ScalarProperty Name="Cash" ColumnName="Cash" />
+                <ScalarProperty Name="OrderDateTime" ColumnName="OrderDateTime" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="StoreNo" ColumnName="StoreNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExtendKeyWord">
+            <EntityTypeMapping TypeName="InkismMISModel.ExtendKeyWord">
+              <MappingFragment StoreEntitySet="ExtendKeyWord">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="keyword" ColumnName="keyword" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreMonthRetailKeyIn">
+            <EntityTypeMapping TypeName="InkismMISModel.StoreMonthRetailKeyIn">
+              <MappingFragment StoreEntitySet="StoreMonthRetailKeyIn">
+                <ScalarProperty Name="TotalRetail" ColumnName="TotalRetail" />
+                <ScalarProperty Name="RetailDate" ColumnName="RetailDate" />
+                <ScalarProperty Name="StoreNo" ColumnName="StoreNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

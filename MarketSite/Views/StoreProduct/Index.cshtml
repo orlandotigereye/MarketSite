@@ -1,0 +1,99 @@
+﻿@model IEnumerable<MarketSite.Models.StoreProductViewModel>
+
+@{
+    ViewBag.Title = @MarketSite.App_GlobalResources.Resource.StoreProduct;
+}
+
+<h2>@MarketSite.App_GlobalResources.Resource.StoreProduct</h2>
+
+@using (Html.BeginForm(null, "StoreProduct", FormMethod.Post, new { id = "formMenu" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="input-group">
+        <div class="container">
+            <div class="form-row">
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchBrand", (IEnumerable<SelectListItem>)ViewBag.searchBrand, new { onChange = "selectBrand()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchCom", (IEnumerable<SelectListItem>)ViewBag.searchCom, new { onChange = "selectCom()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchStore", (IEnumerable<SelectListItem>)ViewBag.searchStore, @MarketSite.App_GlobalResources.Resource.All, new { onChange = "this.form.submit()", @class = "form-control" })
+                </div>                
+                <div class="col-sm-auto">
+                    @Html.TextBox("startDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date", @class = "form-control" }) 
+                </div>
+                <div class="col-sm-auto">@MarketSite.App_GlobalResources.Resource.To</div>
+                <div class="col-sm-auto">
+                    @Html.TextBox("endDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    <input class="col-sm-auto btn btn-primary" type="submit" value="@MarketSite.App_GlobalResources.Resource.Inquiry" />
+                </div>
+                <div class="col-sm-auto">
+                    <input type="button" class="col-sm-auto btn btn-success" value="Excel" onclick="download();" />
+                </div>
+                <div class="col-sm-auto">※@MarketSite.App_GlobalResources.Resource.MaxMonth</div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model != null)
+{
+    <table class="table" id="exportExcel">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th style="text-align:right;">
+                @Html.DisplayNameFor(model => model.ProductCount)
+            </th>
+            <th style="text-align:right;">
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrencyName)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td style="text-align:right;">
+                    @Html.DisplayFor(modelItem => item.ProductCount)
+                </td>
+                <td style="text-align:right;">
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrencyName)
+                </td>
+                <td></td>
+                <td></td>
+                @*<td>
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    </td>*@
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td>總計(Total)</td>
+            <td style="text-align:right;">@ViewBag.countAll</td>
+            <td style="text-align:right;">@ViewBag.totalAll</td>
+            <td></td>
+        </tr>
+    </table>
+}

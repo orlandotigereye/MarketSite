@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>420台中市豐原區向陽路376巷16號</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="AnnualRevenue" xml:space="preserve">
+    <value>年營收(原幣)</value>
+  </data>
+  <data name="AnnualRevenueNTD" xml:space="preserve">
+    <value>年營收(新台幣)</value>
+  </data>
+  <data name="BackList" xml:space="preserve">
+    <value>回到列表</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>變更密碼</value>
+  </data>
+  <data name="ContactUS" xml:space="preserve">
+    <value>聯絡我們</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>幣別</value>
+  </data>
+  <data name="CustomePrice" xml:space="preserve">
+    <value>來客數與客單價</value>
+  </data>
+  <data name="DailyReport" xml:space="preserve">
+    <value>每日業績報表</value>
+  </data>
+  <data name="DailyRevenue" xml:space="preserve">
+    <value>逐日營收</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="DayCount" xml:space="preserve">
+    <value>日班筆數</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>首頁</value>
+  </data>
+  <data name="Inkism" xml:space="preserve">
+    <value>墨力國際股份有限公司</value>
+  </data>
+  <data name="InkismSite" xml:space="preserve">
+    <value>墨力官網</value>
+  </data>
+  <data name="Inquiry" xml:space="preserve">
+    <value>查詢</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>品項</value>
+  </data>
+  <data name="LargeCold" xml:space="preserve">
+    <value>大冷</value>
+  </data>
+  <data name="LargeHot" xml:space="preserve">
+    <value>大熱</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>登入</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="MaxMonth" xml:space="preserve">
+    <value>查詢日期區間最多6個月</value>
+  </data>
+  <data name="MediumCold" xml:space="preserve">
+    <value>中冷</value>
+  </data>
+  <data name="MediumHot" xml:space="preserve">
+    <value>中熱</value>
+  </data>
+  <data name="Microsugar" xml:space="preserve">
+    <value>甜一點</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>月</value>
+  </data>
+  <data name="NightCount" xml:space="preserve">
+    <value>夜班筆數</value>
+  </data>
+  <data name="NonTaxTotal" xml:space="preserve">
+    <value>總未稅金額</value>
+  </data>
+  <data name="NormalSugar" xml:space="preserve">
+    <value>正常糖</value>
+  </data>
+  <data name="OrderDetail" xml:space="preserve">
+    <value>訂單明細</value>
+  </data>
+  <data name="Orderer" xml:space="preserve">
+    <value>打單人員</value>
+  </data>
+  <data name="OrderNum" xml:space="preserve">
+    <value>訂單編號</value>
+  </data>
+  <data name="OrderPrice" xml:space="preserve">
+    <value>訂單金額</value>
+  </data>
+  <data name="OrderTime" xml:space="preserve">
+    <value>打單時間</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>數量</value>
+  </data>
+  <data name="Ranking" xml:space="preserve">
+    <value>排行</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>報表查詢</value>
+  </data>
+  <data name="Revenue" xml:space="preserve">
+    <value>營收</value>
+  </data>
+  <data name="ServiceFee" xml:space="preserve">
+    <value>服務費</value>
+  </data>
+  <data name="SinglePrice" xml:space="preserve">
+    <value>平均客單價</value>
+  </data>
+  <data name="SizeSuger" xml:space="preserve">
+    <value>大小杯及糖量分析</value>
+  </data>
+  <data name="StoreNumName" xml:space="preserve">
+    <value>店號/店名</value>
+  </data>
+  <data name="StoreProduct" xml:space="preserve">
+    <value>門市品項銷售排行</value>
+  </data>
+  <data name="StoreYear" xml:space="preserve">
+    <value>門市歷年營收</value>
+  </data>
+  <data name="Subtotal" xml:space="preserve">
+    <value>小計</value>
+  </data>
+  <data name="Sugar12" xml:space="preserve">
+    <value>2分之1糖</value>
+  </data>
+  <data name="Sugar13" xml:space="preserve">
+    <value>3分之1糖</value>
+  </data>
+  <data name="Sugar14" xml:space="preserve">
+    <value>4分之1糖</value>
+  </data>
+  <data name="Sugar23" xml:space="preserve">
+    <value>3分之2糖</value>
+  </data>
+  <data name="SugarFree" xml:space="preserve">
+    <value>無糖</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>到</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>合計金額</value>
+  </data>
+  <data name="TotalCount" xml:space="preserve">
+    <value>總筆數</value>
+  </data>
+  <data name="TotalCups" xml:space="preserve">
+    <value>總杯數</value>
+  </data>
+  <data name="TotalRetail" xml:space="preserve">
+    <value>總交易金額</value>
+  </data>
+  <data name="Visitors" xml:space="preserve">
+    <value>來客數</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>年份</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>帳號</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>密碼</value>
+  </data>
+  <data name="NoGroup" xml:space="preserve">
+    <value>未分類</value>
+  </data>
+  <data name="CarryType" xml:space="preserve">
+    <value>取餐方式</value>
+  </data>
+  <data name="Money" xml:space="preserve">
+    <value>金額</value>
+  </data>
+  <data name="Qty" xml:space="preserve">
+    <value>數</value>
+  </data>
+  <data name="RankingList" xml:space="preserve">
+    <value>各門店業績排行榜</value>
+  </data>
+</root>

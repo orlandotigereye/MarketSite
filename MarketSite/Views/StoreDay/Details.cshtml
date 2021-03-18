@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MarketSite.Models.RetailSub>
+
+@{
+    ViewBag.Title = @MarketSite.App_GlobalResources.Resource.OrderDetail;
+}
+
+<h2>@MarketSite.App_GlobalResources.Resource.OrderDetail</h2>
+
+<div>
+    <h4>@MarketSite.App_GlobalResources.Resource.OrderNum： @ViewBag.orderItem.OrderNo</h4>
+</div>
+
+    <table class="table" style="width:auto;">
+        <tr>
+            <th>@MarketSite.App_GlobalResources.Resource.Items</th>
+            <th>@MarketSite.App_GlobalResources.Resource.Quantity</th>
+            <th>@MarketSite.App_GlobalResources.Resource.SinglePrice</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                <td style="text-align:right;">@Html.DisplayFor(modelItem => item.ProductCount)</td>
+                <td style="text-align:right;">@Html.DisplayFor(modelItem => item.Price)</td>
+            </tr>
+        }
+    </table>
+    <div>
+        @MarketSite.App_GlobalResources.Resource.OrderPrice：@ViewBag.money
+    </div>
+    @*<div>
+            <h4>訂單明細</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.OrderNo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.OrderNo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ProductName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProductCount)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ProductCount)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+            </dl>
+        </div>*@
+    <p>
+        @Html.ActionLink(@MarketSite.App_GlobalResources.Resource.BackList, "Index")
+    </p>

@@ -1,0 +1,184 @@
+﻿@model IEnumerable<MarketSite.Models.SizeSugarViewModel>
+
+@*<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+
+@{
+    ViewBag.Title = @MarketSite.App_GlobalResources.Resource.SizeSuger;
+}
+
+<h2>@MarketSite.App_GlobalResources.Resource.SizeSuger</h2>
+
+@using (Html.BeginForm(null, "SizeSugar", FormMethod.Post, new { id = "formMenu" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="input-group">
+        <div class="container">
+            <div class="form-row">
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchBrand", (IEnumerable<SelectListItem>)ViewBag.searchBrand, new { onChange = "selectBrand()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchCom", (IEnumerable<SelectListItem>)ViewBag.searchCom, new { onChange = "selectCom()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.DropDownList("searchStore", (IEnumerable<SelectListItem>)ViewBag.searchStore, @MarketSite.App_GlobalResources.Resource.All, new { onChange = "this.form.submit()", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    @Html.TextBox("startDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">@MarketSite.App_GlobalResources.Resource.To</div>
+                <div class="col-sm-auto">
+                    @Html.TextBox("endDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date", @class = "form-control" })
+                </div>
+                <div class="col-sm-auto">
+                    <input class="col-sm-auto btn btn-primary" type="submit" value="@MarketSite.App_GlobalResources.Resource.Inquiry" />
+                </div>
+                <div class="col-sm-auto">
+                    <input type="button" class="col-sm-auto btn btn-success" value="Excel" onclick="download();" />
+                </div>
+                <div class="col-sm-auto">※@MarketSite.App_GlobalResources.Resource.MaxMonth</div>
+            </div>
+        </div>
+    </div>
+}
+
+@*@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ActionLink("下載Excel", "DownLoad", null, new { @class = "btn btn-default" })
+}*@
+<p></p>
+@if (Model != null)
+{
+    <table class="table" id="exportExcel">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.ProductCount)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.LIce)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.LHot)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.MIce)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.MHot)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.S)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.S23)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.S12)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.S13)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.S14)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.SLittle)
+            </th>
+            <th align="right">
+                @Html.DisplayNameFor(model => model.NoS)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.ProductCount)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.LIce)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.LHot)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.MIce)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.MHot)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.S)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.S23)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.S12)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.S13)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.S14)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.SLittle)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.NoS)
+            </td>
+        </tr>
+    }
+
+        <tr>
+            <td>
+                合計(Total)
+            </td>
+            <td align="right">
+                @ViewBag.Total.ProductCount
+            </td>
+            <td align="right">
+                @ViewBag.Total.LIce
+            </td>
+            <td align="right">
+                @ViewBag.Total.LHot
+            </td>
+            <td align="right">
+                @ViewBag.Total.MIce
+            </td>
+            <td align="right">
+                @ViewBag.Total.MHot
+            </td>
+            <td align="right">
+                @ViewBag.Total.S
+            </td>
+            <td align="right">
+                @ViewBag.Total.S23
+            </td>
+            <td align="right">
+                @ViewBag.Total.S12
+            </td>
+            <td align="right">
+                @ViewBag.Total.S13
+            </td>
+            <td>
+                @ViewBag.Total.S14
+            </td>
+            <td align="right">
+                @ViewBag.Total.SLittle
+            </td>
+            <td align="right">
+                @ViewBag.Total.NoS
+            </td>
+        </tr>
+    </table>
+}
